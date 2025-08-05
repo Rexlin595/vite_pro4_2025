@@ -112,13 +112,14 @@ const cancelEdit = () => {
 /* scoped 屬性確保這些樣式只會應用於此元件 */
 .drink-menu-container {
   font-family: 'Helvetica Neue', Arial, sans-serif;
-  width: 80%;
+  width: 90%;
+  max-width: 1200px;
   margin: 2rem auto;
 }
 
 h1 {
   text-align: center;
-  color: #333;
+  color: black;
 }
 
 table {
@@ -132,6 +133,13 @@ td {
   border: 1px solid #ddd;
   padding: 12px 15px;
   text-align: center;
+  color: black;
+  vertical-align: middle;
+}
+
+th:first-child,
+td:first-child {
+  width: 25%;
 }
 
 th {
@@ -156,7 +164,7 @@ button {
   text-decoration: none;
   display: inline-block;
   font-size: 14px;
-  margin: 0 4px;
+  margin: 0;
   cursor: pointer;
   border-radius: 4px;
   transition: background-color 0.3s;
@@ -164,6 +172,14 @@ button {
 
 button:hover {
   background-color: #45a049;
+}
+
+td.stock-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 15px;
 }
 
 .stock-control span {
