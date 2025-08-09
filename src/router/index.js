@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 // 引入您要當作頁面的元件
 import DrinkMenu from '../components/DrinkMenu.vue'
 import BMI from '../components/BMI.vue'
-import Computed from '../components/Computed.vue'
+import Computed from '../components/computed.vue'
 import Week1 from '../components/week1_1.vue'
 import Week2 from '../components/week1_2.vue'
 import Week_hw_tc from '../components/week_hw_tc.vue'
