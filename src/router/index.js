@@ -6,7 +6,7 @@ import BMI from '../components/BMI.vue'
 import Computed from '../components/Computed.vue'
 import Week1 from '../components/week1_1.vue'
 import Week2 from '../components/week1_2.vue'
-impoet Week_hw_tc from '../components/week_hw_tc.vue'
+import Week_hw_tc from '../components/week_hw_tc.vue'
 
 // 定義路由規則 (Routes)
 // 每個路由規則都是一個物件，包含 path, name, และ component
