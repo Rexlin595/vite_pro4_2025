@@ -1,58 +1,71 @@
 # deploy.yml
 
-# 此工作流程的名稱
-name: Deploy Vue app to Pages
+# 工作流程的名稱
+name: Deploy Vue App to GitHub Pages
 
-# 控制此工作流程何時執行
+# 觸發條件：當推送到 'main' 分支時觸發
 on:
-  # 在推送到 main 分支時觸發
   push:
-    branches: ['main'] # 如果你的主要分支是 master，請改成 ["master"]
-
-  # 讓你可以手動在 Actions 頁面觸發此工作流程
+    branches: ['main']
+  # 允許您在 Actions 頁籤手動執行此工作流程
   workflow_dispatch:
 
-# 設定 GITHUB_TOKEN 的權限，以允許部署到 GitHub Pages
+# 設定權限，讓工作流程可以部署到 GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# 只允許一個並行的部署，避免新舊版本同時部署
+# 設定並行策略
 concurrency:
   group: 'pages'
   cancel-in-progress: true
 
 # 定義工作
 jobs:
-  # 建置工作
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout # 步驟1: 取得你的程式碼
-        uses: actions/checkout@v4
-      - name: Set up Node.js # 步驟2: 設定 Node.js 環境
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20 # 使用 Node.js 20 版，也可以用 18
-      - name: Install dependencies # 步驟3: 安裝專案依賴
-        run: npm install
-      - name: Build # 步驟4: 建置專案
-        run: npm run build
-      - name: Upload artifact # 步驟5: 上傳建置好的檔案
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # 從 'dist' 資料夾上傳
-          path: './dist'
-
-  # 部署工作
   deploy:
-    needs: build # 這個工作需要在 'build' 工作完成後才執行
-    runs-on: ubuntu-latest
+    # 指定執行的環境
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
+    # 指定執行的虛擬機類型
+    runs-on: ubuntu-latest
+
+    # 定義執行的步驟
     steps:
-      - name: Deploy to GitHub Pages # 部署到 GitHub Pages
+      # 步驟 1: 拉取程式碼
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 步驟 2: 設定 Node.js 環境
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18 # 您可以根據專案需求更改 Node.js 版本
+          cache: 'npm'
+
+      # 步驟 3: 安裝依賴套件
+      - name: Install dependencies
+        run: npm install
+
+      # 步驟 4: 建置專案
+      # npm run build 會讀取 vite.config.js 中的 base 設定
+      - name: Build
+        run: npm run build
+
+      # 步驟 5: 設定 GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      # 步驟 6: 上傳建置好的檔案作為 artifact
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # 指定要上傳的資料夾 (Vite 預設的建置輸出資料夾)
+          path: './dist'
+
+      # 步驟 7: 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
