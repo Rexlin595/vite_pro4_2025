@@ -1,17 +1,17 @@
 <template>
-  <div class="container mx-auto p-4 md:p-8 bg-gray-50 min-h-screen">
-    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+  <div class="container mx-auto p-4 md:p-8 bg-gray-900 min-h-screen">
+    <div class="max-w-4xl mx-auto bg-gray-800 rounded-xl shadow-lg overflow-hidden">
       <div class="p-6 md:p-8">
-        <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 text-center">
+        <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 text-center">
           👨‍🎓 學生名單與成績
         </h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 text-center">
-          <div class="bg-blue-100 text-blue-800 p-4 rounded-lg">
+          <div class="bg-blue-600 text-white p-4 rounded-lg shadow-md">
             <p class="text-lg font-semibold">平均分數</p>
             <p class="text-3xl font-bold">{{ averageScore }}</p>
           </div>
-          <div class="bg-green-100 text-green-800 p-4 rounded-lg">
+          <div class="bg-green-600 text-white p-4 rounded-lg shadow-md">
             <p class="text-lg font-semibold">最高分數</p>
             <p class="text-3xl font-bold">{{ highestScore }}</p>
           </div>
@@ -19,7 +19,7 @@
 
         <div class="overflow-x-auto">
           <table class="min-w-full text-left text-sm font-light">
-            <thead class="border-b bg-gray-800 text-white font-medium">
+            <thead class="border-b border-gray-600 bg-gray-900 text-gray-200 font-medium">
               <tr>
                 <th scope="col" class="px-6 py-4">學號</th>
                 <th scope="col" class="px-6 py-4">姓名</th>
@@ -31,10 +31,12 @@
               <tr
                 v-for="student in students"
                 :key="student.id"
-                class="border-b transition duration-300 ease-in-out hover:bg-gray-100"
+                class="border-b border-gray-700 text-gray-300 transition duration-300 ease-in-out hover:bg-gray-700"
               >
                 <td class="whitespace-nowrap px-6 py-4 font-mono">{{ student.id }}</td>
-                <td class="whitespace-nowrap px-6 py-4 font-medium">{{ student.name }}</td>
+                <td class="whitespace-nowrap px-6 py-4 font-medium text-white">
+                  {{ student.name }}
+                </td>
                 <td class="whitespace-nowrap px-6 py-4 text-center">
                   <span
                     :class="getScoreClass(student.score)"
@@ -82,11 +84,11 @@ const highestScore = computed(() => {
 
 // 根據分數回傳對應的 CSS class
 function getScoreClass(score) {
-  if (score >= 90) return 'bg-green-200 text-green-800'
-  if (score >= 80) return 'bg-blue-200 text-blue-800'
-  if (score >= 70) return 'bg-yellow-200 text-yellow-800'
-  if (score >= 60) return 'bg-orange-200 text-orange-800'
-  return 'bg-red-200 text-red-800'
+  if (score >= 90) return 'bg-green-600 text-white'
+  if (score >= 80) return 'bg-blue-600 text-white'
+  if (score >= 70) return 'bg-yellow-600 text-white'
+  if (score >= 60) return 'bg-orange-600 text-white'
+  return 'bg-red-600 text-white'
 }
 
 // 根據分數回傳對應的表情符號
