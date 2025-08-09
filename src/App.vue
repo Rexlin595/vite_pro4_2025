@@ -12,7 +12,7 @@ import { RouterLink, RouterView } from 'vue-router'
       <RouterLink to="/computed">Computed 範例</RouterLink>
       <RouterLink to="/week1">Week 1</RouterLink>
       <RouterLink to="/week2">Week 2</RouterLink>
-      <RouterLink to="/week_hw_tc">Week_hw_tc</RouterLink>
+      <RouterLink to="/week1_hw_tc">Week1_hw_tc</RouterLink>
     </nav>
   </header>
 

@@ -6,10 +6,10 @@ import BMI from '../components/BMI.vue'
 import Computed from '../components/computed.vue'
 import Week1 from '../components/week1_1.vue'
 import Week2 from '../components/week1_2.vue'
-import Week_hw_tc from '../components/week_hw_tc.vue'
+import Week1_hw_tc from '../components/week1_hw_tc.vue'
 
 // 定義路由規則 (Routes)
-// 每個路由規則都是一個物件，包含 path, name, และ component
+// 每個路由規則都是一個物件，包含 path, name, 和 component
 const routes = [
   {
     path: '/', // 網址路徑
@@ -37,9 +37,9 @@ const routes = [
     component: Week2,
   },
   {
-    path: '/week_hw_tc',
-    name: 'Week_hw_tc',
-    component: Week_hw_tc,
+    path: '/week1_hw_tc',
+    name: 'Week1_hw_tc',
+    component: Week1_hw_tc,
   },
 ]
 
