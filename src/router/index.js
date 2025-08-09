@@ -45,7 +45,7 @@ const routes = [
 
 // 建立 Router 實例
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL), // 使用 HTML5 History 模式
+  history: createWebHistory(),
   routes, // 將我們定義的路由規則陣列放入
 })
 
