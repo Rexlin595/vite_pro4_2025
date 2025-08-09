@@ -1,31 +1,45 @@
 <template>
-  <div class="container mt-5">
-    <table>
-      <thead>
-        <tr>
-          <th scope="col">品項</th>
-          <th scope="col">描述</th>
-          <th scope="col">價格</th>
-          <th scope="col">庫存</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in drinks" :key="item.id">
-          <td>{{ item.name }}</td>
-          <td>
-            <small>{{ item.description }}</small>
-          </td>
-          <td>{{ item.price }}</td>
-          <td>
-            <button @click="handleDrinkStock(item.id, item.stock - 1)" :disabled="item.stock < 1">
-              -
-            </button>
-            {{ item.stock }}
-            <button @click="handleDrinkStock(item.id, item.stock + 1)">+</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="container mt-4">
+    <h2 class="mb-4 text-center">飲品菜單</h2>
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col" class="text-center">品項</th>
+            <th scope="col">描述</th>
+            <th scope="col" class="text-center">價格</th>
+            <th scope="col" class="text-center" style="width: 150px">庫存</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in drinks" :key="item.id">
+            <td class="fw-bold text-center">{{ item.name }}</td>
+            <td>
+              <small>{{ item.description }}</small>
+            </td>
+            <td class="text-center">${{ item.price }}</td>
+            <td>
+              <div class="d-flex justify-content-center align-items-center">
+                <button
+                  class="btn btn-sm btn-outline-danger"
+                  @click="handleDrinkStock(item.id, item.stock - 1)"
+                  :disabled="item.stock < 1"
+                >
+                  -
+                </button>
+                <span class="mx-2 stock-display">{{ item.stock }}</span>
+                <button
+                  class="btn btn-sm btn-outline-success"
+                  @click="handleDrinkStock(item.id, item.stock + 1)"
+                >
+                  +
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -94,6 +108,9 @@ const data = [
 const drinks = ref(data)
 
 function handleDrinkStock(id, stock) {
+  // 確保庫存不會變成負數
+  if (stock < 0) return
+
   drinks.value = drinks.value.map((item) => {
     if (item.id === id) {
       item.stock = stock
@@ -102,3 +119,30 @@ function handleDrinkStock(id, stock) {
   })
 }
 </script>
+
+<style scoped>
+/* scoped 樣式只會作用在這個元件內，不會影響到其他元件 */
+.container {
+  max-width: 800px;
+}
+
+.table {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stock-display {
+  display: inline-block;
+  width: 40px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.btn {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  line-height: 1;
+  padding: 0;
+}
+</style>
