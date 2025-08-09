@@ -28,17 +28,19 @@
             <small>{{ item.description }}</small>
           </td>
 
-          <td>{{ item.price }}</td>
+          <td>${{ item.price }}</td>
 
           <td class="stock-control">
-            <button @click="decreaseStock(item)">-</button>
+            <button class="btn-decrease" @click="decreaseStock(item)">-</button>
             <span>{{ item.stock }}</span>
-            <button @click="increaseStock(item)">+</button>
+            <button class="btn-increase" @click="increaseStock(item)">+</button>
           </td>
 
           <td>
-            <button v-if="editingItemId === item.id" @click="confirmEdit(item)">確認</button>
-            <button v-else @click="startEdit(item)">編輯</button>
+            <button v-if="editingItemId === item.id" class="btn-confirm" @click="confirmEdit(item)">
+              確認
+            </button>
+            <button v-else class="btn-edit" @click="startEdit(item)">編輯</button>
           </td>
         </tr>
       </tbody>
@@ -119,60 +121,98 @@ const cancelEdit = () => {
 
 h1 {
   text-align: center;
-  color: black;
+  color: #e5e7eb; /* 淺灰色文字 */
+  margin-bottom: 2rem;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #1f2937; /* 深灰色背景 (gray-800) */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  overflow: hidden; /* 確保圓角效果 */
 }
 
 th,
 td {
-  border: 1px solid #ddd;
-  padding: 12px 15px;
+  border: 1px solid #374151; /* 深灰色邊框 (gray-700) */
+  padding: 14px 18px;
   text-align: center;
-  color: black;
+  color: #d1d5db; /* 淺灰色文字 (gray-300) */
   vertical-align: middle;
 }
 
-th:first-child,
 td:first-child {
-  width: 25%;
+  color: #ffffff; /* 品項名稱使用白色，更突出 */
+  font-weight: 500;
 }
 
 th {
-  background-color: #4caf50;
-  color: white;
+  background-color: #374151; /* 標題使用更深的灰色 (gray-700) */
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+tr {
+  background-color: #1f2937; /* 單數行背景 (gray-800) */
 }
 
 tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #283342; /* 雙數行使用稍微不同的深灰 */
 }
 
 tr:hover {
-  background-color: #ddd;
+  background-color: #4b5563; /* 滑鼠懸停時的顏色 (gray-600) */
 }
 
 button {
-  background-color: #4caf50;
   color: white;
   border: none;
-  padding: 8px 12px;
+  padding: 8px 16px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 14px;
   margin: 0;
   cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s;
+  border-radius: 6px;
+  transition: all 0.3s ease;
 }
 
 button:hover {
-  background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
+
+.btn-decrease {
+  background-color: #dc2626;
+} /* red-600 */
+.btn-decrease:hover {
+  background-color: #b91c1c;
+} /* red-700 */
+
+.btn-increase {
+  background-color: #16a34a;
+} /* green-600 */
+.btn-increase:hover {
+  background-color: #15803d;
+} /* green-700 */
+
+.btn-edit {
+  background-color: #8b5cf6;
+} /* violet-500 */
+.btn-edit:hover {
+  background-color: #7c3aed;
+} /* violet-600 */
+
+.btn-confirm {
+  background-color: #2563eb;
+} /* blue-600 */
+.btn-confirm:hover {
+  background-color: #1d4ed8;
+} /* blue-700 */
 
 td.stock-control {
   display: flex;
@@ -180,6 +220,8 @@ td.stock-control {
   align-items: center;
   gap: 12px;
   padding: 8px 15px;
+  border: 1px solid transparent; /* 移除庫存控制格的邊框 */
+  border-bottom: 1px solid #374151;
 }
 
 .stock-control span {
@@ -187,12 +229,21 @@ td.stock-control {
   width: 30px;
   text-align: center;
   font-weight: bold;
+  font-size: 1.1rem;
+  color: #ffffff;
 }
 
 td input[type='text'] {
-  width: 90%;
+  width: 95%;
   padding: 8px;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  background-color: #4b5563; /* gray-600 */
+  border: 1px solid #6b7280; /* gray-500 */
+  color: #ffffff;
+  outline: none;
+}
+td input[type='text']:focus {
+  border-color: #8b5cf6; /* violet-500 */
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.4);
 }
 </style>

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-// 引入您要當作頁面的元件
+// 引入所有需要的元件
+import HomeView from '../components/HomeView.vue' // 引入新的主目錄頁面
 import DrinkMenu from '../components/DrinkMenu.vue'
 import BMI from '../components/BMI.vue'
 import Computed from '../components/computed.vue'
@@ -8,13 +9,16 @@ import Week1 from '../components/week1_1.vue'
 import Week2 from '../components/week1_2.vue'
 import Week1_hw_tc from '../components/week1_hw_tc.vue'
 
-// 定義路由規則 (Routes)
-// 每個路由規則都是一個物件，包含 path, name, 和 component
 const routes = [
   {
-    path: '/', // 網址路徑
-    name: 'DrinkMenu', // 路由名稱 (可選，但建議使用)
-    component: DrinkMenu, // 對應的元件
+    path: '/', // 根路徑現在指向主目錄
+    name: 'Home',
+    component: HomeView,
+  },
+  {
+    path: '/drink-menu', // 將飲品菜單的路徑改為 /drink-menu
+    name: 'DrinkMenu',
+    component: DrinkMenu,
   },
   {
     path: '/bmi',
@@ -43,11 +47,9 @@ const routes = [
   },
 ]
 
-// 建立 Router 實例
 const router = createRouter({
   history: createWebHistory(),
-  routes, // 將我們定義的路由規則陣列放入
+  routes,
 })
 
-// 將 Router 實例匯出
 export default router

@@ -1,18 +1,12 @@
 <script setup>
-// 現在我們不需要在這裡 import 所有元件了
-// vue-router 會根據 URL 自動載入對應的元件
 import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
   <header>
     <nav>
-      <RouterLink to="/">飲品菜單</RouterLink>
-      <RouterLink to="/bmi">BMI 計算機</RouterLink>
-      <RouterLink to="/computed">Computed 範例</RouterLink>
-      <RouterLink to="/week1">Week 1</RouterLink>
-      <RouterLink to="/week2">Week 2</RouterLink>
-      <RouterLink to="/week1_hw_tc">Week1 作業</RouterLink>
+      <!-- 導覽列現在只剩下一個回到主目錄的連結 -->
+      <RouterLink to="/" class="home-link">🏠 主目錄</RouterLink>
     </nav>
   </header>
 
@@ -23,50 +17,53 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <style>
 /* 為了讓深色主題應用到整個頁面，我們將樣式從 scoped 改為全域 */
-/* 如果您只想修改這個元件，可以保留 scoped，但建議全域統一主題 */
 body {
-  background-color: #111827; /* Tailwind's gray-900 */
+  /* 與 HomeView.vue 的背景色 (bg-gray-900) 保持一致 */
+  background-color: #111827;
 }
 
 header {
   line-height: 1.5;
   padding: 1rem 0;
-  border-bottom: 1px solid #374151; /* Darker border (gray-700) */
-  background-color: #1f2937; /* Dark background (gray-800) */
+  /* 與 HomeView.vue 卡片和 App.vue 其他元件的邊框顏色一致 */
+  border-bottom: 1px solid #374151;
+  /* 與 HomeView.vue 卡片的背景色 (bg-gray-800) 一致 */
+  background-color: #000000;
 }
 
 nav {
   width: 100%;
-  font-size: 1rem;
+  font-size: 1.1rem; /* 稍微放大字體 */
   text-align: center;
-  margin-top: 1rem;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  border-left: 1px solid #4b5563; /* gray-600 */
+/* 移除舊的 a 標籤樣式，改用新的 home-link 樣式 */
+.home-link {
+  padding: 0.5rem 1.5rem;
   text-decoration: none;
-  color: #d1d5db; /* Lighter text color for dark background (gray-300) */
-  transition: color 0.3s;
+  /* 在深色背景下清晰的淺灰色文字 */
+  color: #d1d5db;
+  transition: all 0.3s;
+  border-radius: 8px;
 }
 
-nav a:first-of-type {
-  border: 0;
+.home-link:hover {
+  background-color: #374151; /* 滑鼠懸停時的背景色 */
+  color: #fff;
 }
 
-/* 這個樣式會應用在當前 active 的連結上 */
-nav a.router-link-exact-active {
-  color: #34d399; /* A vibrant color for active link (emerald-400) */
+/* 當前 active 的連結樣式 */
+.home-link.router-link-exact-active {
+  color: #34d399; /* 鮮明的綠色，用於高亮 */
   font-weight: bold;
 }
 
 main {
+  /* main 的樣式維持不變 */
   display: flex;
   justify-content: center;
   align-items: flex-start;
   min-height: calc(100vh - 80px); /* 根據 header 高度微調 */
   padding-top: 2rem;
-  /* 背景色由 body 控制，這裡不需要再設定 */
 }
 </style>
